@@ -1,5 +1,6 @@
 .idea
-attachments
+attachments/*
+!attachments/file_is_download_here
 pdf
 backup
 target

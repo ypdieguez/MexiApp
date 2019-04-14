@@ -33,8 +33,6 @@ class AccountController {
         val account = H2.getInstance().account
         user.text = account.username
         pass.text = account.password
-
-        Log.setLabel(error)
     }
 
     fun accept() {

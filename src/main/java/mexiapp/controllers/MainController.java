@@ -1,6 +1,7 @@
 package mexiapp.controllers;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,6 +11,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import mexiapp.utils.H2;
 import mexiapp.utils.Log;
@@ -31,8 +33,6 @@ public class MainController {
     public Label code;
     @FXML
     public Label token;
-    @FXML
-    public Label errorLabel;
 
     private Thread backgroundThread;
     private Thread backgroundThread2;
@@ -41,10 +41,6 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        Log.setLabel(errorLabel);
-
-        Runnable task1 = this::runTask;
-        backgroundThread = new Thread(task1);
         // Terminate the running thread if the application exits
         backgroundThread.setDaemon(true);
 
@@ -82,14 +78,19 @@ public class MainController {
 
     public void toggle() {
         if (playBtn.isSelected()) {
-            playBtn.setText("Stop");
-            accountBtn.setDisable(true);
-            errorLabel.setText("-");
+            if (!backgroundThread.isAlive()) {
+                playBtn.setText("Stop");
+                accountBtn.setDisable(true);
 
-            stop = false;
+                stop = false;
 
-            // Start the thread
-            backgroundThread.start();
+                // Start the thread
+                Runnable task1 = this::runTask;
+                backgroundThread = new Thread(task1);
+                backgroundThread.start();
+            } else {
+                playBtn.setSelected(false);
+            }
         } else {
             stop = true;
             playBtn.setDisable(true);
@@ -134,5 +135,13 @@ public class MainController {
                 read = true;
             }
         }
+    }
+
+    public void log(ActionEvent actionEvent) throws IOException {
+        HBox hBox = new HBox(Log.getInstance().log);
+        Stage stage = new Stage();
+        stage.setTitle("Log");
+        stage.setScene(new Scene(hBox, 300, 120));
+        stage.show();
     }
 }

@@ -27,7 +27,7 @@ public class H2 {
                     "&8McqKMnkn>v/~`4`NL#$U*fJ>~D=rkL{Hf<6e8bRw7vZH5AUk.}x6V/DvEm-8X5"
             );
         } catch (SQLException e) {
-            Log.exception(e);
+            Log.getInstance().exception(e);
         }
     }
 
@@ -37,7 +37,7 @@ public class H2 {
             r.first();
             return r.getBoolean("ACTIVE");
         } catch (SQLException e) {
-            Log.exception(e);
+            Log.getInstance().exception(e);
             return false;
         }
     }
@@ -46,7 +46,7 @@ public class H2 {
         try {
             conn.close();
         } catch (SQLException e) {
-            Log.exception(e);
+            Log.getInstance().exception(e);
         }
     }
 
@@ -59,7 +59,7 @@ public class H2 {
             prep.execute();
             return true;
         } catch (SQLException e) {
-            Log.exception(e);
+            Log.getInstance().exception(e);
             return false;
         }
 
@@ -84,7 +84,7 @@ public class H2 {
             prep.setBoolean(1, active);
             prep.execute();
         } catch (SQLException e) {
-            Log.exception(e);
+            Log.getInstance().exception(e);
         }
     }
 }
