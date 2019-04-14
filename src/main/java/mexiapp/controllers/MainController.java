@@ -41,6 +41,8 @@ public class MainController {
 
     @FXML
     public void initialize() {
+        Runnable task1 = this::runTask;
+        backgroundThread = new Thread(task1);
         // Terminate the running thread if the application exits
         backgroundThread.setDaemon(true);
 
@@ -78,15 +80,13 @@ public class MainController {
 
     public void toggle() {
         if (playBtn.isSelected()) {
-            if (!backgroundThread.isAlive()) {
+            if (backgroundThread != null && !backgroundThread.isAlive()) {
                 playBtn.setText("Stop");
                 accountBtn.setDisable(true);
 
                 stop = false;
 
                 // Start the thread
-                Runnable task1 = this::runTask;
-                backgroundThread = new Thread(task1);
                 backgroundThread.start();
             } else {
                 playBtn.setSelected(false);
