@@ -7,7 +7,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Properties;
 
@@ -81,7 +80,7 @@ public class Mail {
             folder.close();
             store.close();
         } catch (MessagingException e) {
-            Log.exception(e);
+            Log.getInstance().exception(e);
         }
 
         return subject;
@@ -103,7 +102,7 @@ public class Mail {
             // Connect
             store.connect("pop.gmail.com", user, password);
         } catch (MessagingException e) {
-            Log.exception(e);
+            Log.getInstance().exception(e);
         }
         return store;
     }
@@ -151,7 +150,7 @@ public class Mail {
                 }
             }
         } catch (MessagingException | IOException e) {
-            Log.exception(e);
+            Log.getInstance().exception(e);
         }
     }
 
@@ -162,7 +161,7 @@ public class Mail {
             try {
                 store.close();
             } catch (MessagingException e) {
-                Log.exception(e);
+                Log.getInstance().exception(e);
             }
         }
         return flag;

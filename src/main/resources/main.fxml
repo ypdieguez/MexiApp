@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
@@ -47,9 +48,9 @@
       <ToolBar prefHeight="0.0" prefWidth="670.0" BorderPane.alignment="CENTER">
         <items>
           <Button fx:id="accountBtn" mnemonicParsing="false" onAction="#editAccount" text="Cuenta" />
-            <ToggleButton fx:id="playBtn" mnemonicParsing="false" text="Play" onAction="#toggle"/>
-            <Label text="Info:" />
-            <Label fx:id="errorLabel" prefHeight="17.0" prefWidth="527.0" text="-" />
+            <ToggleButton fx:id="playBtn" mnemonicParsing="false" onAction="#toggle" text="Play" />
+            <Separator prefHeight="25.0" prefWidth="514.0" />
+            <Button fx:id="logBtn" mnemonicParsing="false" onAction="#log" text="Log" />
         </items>
       </ToolBar>
    </top>
